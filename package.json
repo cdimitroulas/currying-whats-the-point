@@ -4,8 +4,17 @@
   "description": "Code to accompany the \"Currying - What's the point?\" blogpost series",
   "main": "index.js",
   "scripts": {
+    "compile": "typescript-scripts compile",
+    "compile:watch": "npm run compile -- --watch",
+    "functionCompositionUncurried": "typescript-scripts run ./01-function-composition/uncurried.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@cdimitroulas/typescript-scripts": "^3.1.0",
+    "@types/striptags": "^3.1.1",
+    "fp-ts": "^2.11.1",
+    "striptags": "^3.2.0"
+  }
 }
