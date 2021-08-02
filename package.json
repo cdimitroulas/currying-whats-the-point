@@ -7,6 +7,7 @@
     "compile": "typescript-scripts compile",
     "compile:watch": "npm run compile -- --watch",
     "functionCompositionUncurried": "typescript-scripts run ./01-function-composition/uncurried.ts",
+    "functionCompositionCurried": "typescript-scripts run ./01-function-composition/curried.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
