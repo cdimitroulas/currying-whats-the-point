@@ -8,6 +8,7 @@
     "compile:watch": "npm run compile -- --watch",
     "functionCompositionUncurried": "typescript-scripts run ./01-function-composition/uncurried.ts",
     "functionCompositionCurried": "typescript-scripts run ./01-function-composition/curried.ts",
+    "partialApplicationBasics": "typescript-scripts run ./02-partial-application/basics.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
