@@ -8,6 +8,7 @@ export type ILogger = {
 }
 
 export type IUserRepository = {
+  fetchUser: (userId: number) => Promise<User>;
   saveUserChanges: (user: User) => Promise<void>;
 };
 
@@ -26,11 +27,14 @@ const checkEmailFormat = (email: string): void => {
 
 export const updateUserEmail = (
   dependencies: Dependencies
-) => async (user: User, newEmail: string): Promise<void> => {
-  checkEmailFormat(newEmail);
+) => async (userId: number, newEmail: string): Promise<User> => {
+  const { logger, userRepository } = dependencies;
 
+  checkEmailFormat(newEmail);
+  const user = await userRepository.fetchUser(userId);
   const updatedUser = { ...user, email: newEmail };
-  await dependencies.userRepository.saveUserChanges(updatedUser);
-  dependencies.logger.info(`Email updated for user with ID ${user.id}`);
+  await userRepository.saveUserChanges(updatedUser);
+  logger.info(`Email updated for user with ID ${user.id}`);
+  return updatedUser;
 }
 

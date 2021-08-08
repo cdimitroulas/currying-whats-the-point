@@ -16,12 +16,13 @@ describe("updateUserEmail", () => {
     const user = { id: 1, email: "test@example.com" };
     const logger = { info: () => {} };
     const userRepository = {
+      fetchUser: async () => user,
       saveUserChanges: async () => undefined
     };
     const dependencies = { logger, userRepository };
 
     // Act
-    const promise = updateUserEmail(dependencies)(user, "invalid-email");
+    const promise = updateUserEmail(dependencies)(user.id, "invalid-email");
 
     // Assert
     await assert.isRejected(promise, "Not a valid email");
@@ -32,13 +33,14 @@ describe("updateUserEmail", () => {
     const user = { id: 1, email: "test@example.com" };
     const logger = { info: () => {} };
     const userRepository = {
+      fetchUser: async () => user,
       saveUserChanges: sinon.mock().resolves(undefined)
     };
     const dependencies = { logger, userRepository };
     const newEmail = "test2@example.com";
 
     // Act
-    await updateUserEmail(dependencies)(user, newEmail);
+    await updateUserEmail(dependencies)(user.id, newEmail);
 
     // Assert
     assert.equal(
@@ -57,13 +59,14 @@ describe("updateUserEmail", () => {
     const user = { id: 1, email: "test@example.com" };
     const logger = { info: sinon.mock() };
     const userRepository = {
+      fetchUser: async () => user,
       saveUserChanges: async () => undefined
     };
     const dependencies = { logger, userRepository };
     const newEmail = "test2@example.com";
 
     // Act
-    await updateUserEmail(dependencies)(user, newEmail);
+    await updateUserEmail(dependencies)(user.id, newEmail);
 
     // Assert
     assert.equal(

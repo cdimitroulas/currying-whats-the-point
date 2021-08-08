@@ -18,6 +18,13 @@ const users: Record<string, User> = {
 };
 
 const userRepository: IUserRepository = {
+  fetchUser: async (userId) => {
+    const user = users[userId];
+    if (!user) {
+      throw new Error("User not found");
+    }
+    return user
+  },
   saveUserChanges: async user => {
     users[user.id] = user;
   }
@@ -35,16 +42,11 @@ app.use(express.urlencoded({ extended: true }));
 
 app.post("/users/:id/email", async (req, res) => {
   const email: string = req.body.email;
-  const userId: string = req.params.id;
-  const user = users[userId];
+  const userId: number = parseInt(req.params.id);
 
-  if (!user) {
-    return res.sendStatus(404);
-  }
+  const updatedUser = await updateUserEmailWithDeps(userId, email);
 
-  await updateUserEmailWithDeps(user, email);
-
-  res.status(200).send(users[userId]);
+  res.status(200).send(updatedUser);
 });
 
 app.listen(8080, () => {
