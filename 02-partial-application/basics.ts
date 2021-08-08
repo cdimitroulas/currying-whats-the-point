@@ -5,7 +5,7 @@ type ILogger = {
 /**
  * Class-based approach
  */
-class Car {
+export class Car {
   private logger: ILogger;
 
   constructor(logger: ILogger) {
@@ -25,7 +25,7 @@ car.honkHorn();
 /**
  * Function-based approach
  */
-const honkHorn = (logger: ILogger) => () => logger.log("HONK HONK!");
+export const honkHorn = (logger: ILogger) => () => logger.log("HONK HONK!");
 
 honkHorn(logger)();
 

@@ -6,17 +6,29 @@
   "scripts": {
     "compile": "typescript-scripts compile",
     "compile:watch": "npm run compile -- --watch",
+    "lint": "typescript-scripts lint src/",
     "functionCompositionUncurried": "typescript-scripts run ./01-function-composition/uncurried.ts",
     "functionCompositionCurried": "typescript-scripts run ./01-function-composition/curried.ts",
     "partialApplicationBasics": "typescript-scripts run ./02-partial-application/basics.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "partialApplicationExpress": "typescript-scripts run ./02-partial-application/update-user-email/usage.ts",
+    "test": "typescript-scripts test './**/*.spec.ts'",
+    "test:watch": "npm run test -- --watch --watch-files='./**/*.ts'",
+    "verify": "npm run compile -- --noEmit && npm run lint && npm run test"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@cdimitroulas/typescript-scripts": "^3.1.0",
+    "@types/chai": "^4.2.21",
+    "@types/chai-as-promised": "^7.1.4",
+    "@types/express": "^4.17.13",
+    "@types/sinon": "^10.0.2",
     "@types/striptags": "^3.1.1",
+    "chai": "^4.3.4",
+    "chai-as-promised": "^7.1.1",
+    "express": "^4.17.1",
     "fp-ts": "^2.11.1",
+    "sinon": "^11.1.2",
     "striptags": "^3.2.0"
   }
 }
